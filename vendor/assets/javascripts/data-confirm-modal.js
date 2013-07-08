@@ -45,6 +45,10 @@
     var commit = modal.find('.commit');
     commit.text(element.data('commit') || 'Confirm');
 
+    if(element.data('remote')){
+      commit.attr('data-dismiss', 'modal');
+    }   
+
     var verify = element.data('verify');
     if (verify) {
       commit.prop('disabled', true);
