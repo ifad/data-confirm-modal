@@ -21,18 +21,20 @@
   var buildModal = function (element) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
 
-    var modal = $('\
-      <div id="'+id+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true"> \
-        <div class="modal-header"> \
-          <button class="close" data-dismiss="modal" aria-hidden="true">×</button> \
-          <h3 id="'+id+'Label"></h3> \
-        </div> \
-        <div class="modal-body"></div> \
-        <div class="modal-footer"> \
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button> \
-          <button class="btn btn-danger commit"></button> \
-        </div> \
-      </div>');
+    var modal_string = '';
+    modal_string += '<div id="'+id+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">';
+    modal_string += '<div class="modal-header">';
+    modal_string += '<button class="close" data-dismiss="modal" aria-hidden="true">×</button>';
+    modal_string += '<h3 id="'+id+'Label"></h3> ';
+    modal_string += '</div>';
+    modal_string += '<div class="modal-body"></div>';
+    modal_string += '<div class="modal-footer">';
+    modal_string += '<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>';
+    modal_string += '<button class="btn btn-danger commit"></button>';
+    modal_string += '</div>';
+    modal_string += '</div>';
+  
+    var modal = $(modal_string);
 
     modal.find('.modal-header h3').text(element.attr('title') || 'Are you ABSOLUTELY sure?');
 
