@@ -34,7 +34,9 @@
         </div> \
       </div>');
 
-    modal.find('.modal-header h3').text(element.attr('title') || 'Are you ABSOLUTELY sure?');
+    var title = element.attr('title') || element.data('original-title') || 'Are you ABSOLUTELY sure?';
+
+    modal.find('.modal-header h3').text(title);
 
     var body = modal.find('.modal-body');
 
@@ -47,7 +49,7 @@
 
     if(element.data('remote')){
       commit.attr('data-dismiss', 'modal');
-    }   
+    }
 
     var verify = element.data('verify');
     if (verify) {
