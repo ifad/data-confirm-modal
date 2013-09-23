@@ -49,7 +49,7 @@
 
     if(element.data('remote')){
       commit.attr('data-dismiss', 'modal');
-    }   
+    }
 
     var verify = element.data('verify');
     if (verify) {
