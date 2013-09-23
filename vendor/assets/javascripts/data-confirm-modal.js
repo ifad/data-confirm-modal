@@ -74,6 +74,7 @@
     commit.on('click', function () {
       modal.data('confirmed', true);
       element.trigger('click');
+      modal.modal('hide');
     });
 
     $('body').append(modal);
