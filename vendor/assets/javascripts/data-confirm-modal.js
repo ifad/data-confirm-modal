@@ -17,7 +17,37 @@
    *  * `data-verify`:  Adds a text input in which the user has to input
    *                    the text in this attribute value for the 'confirm'
    *                    button to be clickable. Optional.
+   *
+   * You can set global setting using `dataConfirmModal.setDefaults`, for example:
+   *
+   *    dataConfirmModal.setDefaults({
+   *      title: 'Comfirm your action',
+   *      commit: 'Continue',
+   *      cancel: 'Cancel'
+   *    });
+   *
    */
+
+  var defaults = {
+    title: 'Are you ABSOLUTELY sure?',
+    commit: 'Confirm',
+    cancel: 'Cancel'
+  };
+
+  var settings;
+
+  window.dataConfirmModal = {
+    setDefaults: function (newSettings) {
+      settings = $.extend(settings, newSettings);
+    },
+
+    restoreDefaults: function () {
+      settings = $.extend({}, defaults);
+    }
+  };
+
+  dataConfirmModal.restoreDefaults();
+
   var buildModal = function (element) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
 
@@ -29,13 +59,13 @@
         '</div>' +
         '<div class="modal-body"></div>' +
         '<div class="modal-footer">' +
-          '<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>' +
+          '<button class="btn" data-dismiss="modal" aria-hidden="true">' + settings.cancel + '</button>' +
           '<button class="btn btn-danger commit"></button>' +
         '</div>'+
       '</div>'
     );
 
-    var title = element.attr('title') || element.data('original-title') || 'Are you ABSOLUTELY sure?';
+    var title = element.attr('title') || element.data('original-title') || settings.title;
 
     modal.find('.modal-header h3').text(title);
 
@@ -46,7 +76,7 @@
     });
 
     var commit = modal.find('.commit');
-    commit.text(element.data('commit') || 'Confirm');
+    commit.text(element.data('commit') || settings.commit);
 
     if(element.data('remote')){
       commit.attr('data-dismiss', 'modal');
