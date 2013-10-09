@@ -42,7 +42,7 @@ value is what you want your user to input.
 You can set global setting using `dataConfirmModal.setDefaults`, for example:
 
     dataConfirmModal.setDefaults({
-      title: 'Comfirm your action',
+      title: 'Confirm your action',
       commit: 'Continue',
       cancel: 'Cancel'
     });
