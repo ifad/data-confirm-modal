@@ -39,6 +39,16 @@ attribute.
 If you want to add a verification input, use a `data-verify` attribute, whose
 value is what you want your user to input.
 
+You can set global setting using `dataConfirmModal.setDefaults`, for example:
+
+    dataConfirmModal.setDefaults({
+      title: 'Confirm your action',
+      commit: 'Continue',
+      cancel: 'Cancel'
+    });
+
+To restore default settings use `dataConfirmModal.restoreDefaults()`.
+
 ## Authors
 
 * Marcello Barnaba ([@vjt](https://github.com/vjt))
