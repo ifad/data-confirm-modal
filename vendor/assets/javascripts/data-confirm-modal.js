@@ -136,7 +136,7 @@
    * A modal is considered 'confirmed' when an user has successfully clicked
    * the 'confirm' button in it.
    */
-  $(document).delegate('input[data-confirm], a[data-confirm], button[data-confirm]', 'confirm', function (e) {
+  $(document).delegate('a[data-confirm], button[data-confirm], input[data-confirm]', 'confirm', function (e) {
     var element = $(this), modal = getModal(element);
     var confirmed = modal.data('confirmed');
 
