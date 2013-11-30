@@ -31,7 +31,8 @@
   var defaults = {
     title: 'Are you ABSOLUTELY sure?',
     commit: 'Confirm',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
   };
 
   var settings;
@@ -136,7 +137,7 @@
    * A modal is considered 'confirmed' when an user has successfully clicked
    * the 'confirm' button in it.
    */
-  $(document).delegate('a[data-confirm], button[data-confirm]', 'confirm', function (e) {
+  $(document).delegate(settings.elements.join(', '), 'confirm', function() {
     var element = $(this), modal = getModal(element);
     var confirmed = modal.data('confirmed');
 
@@ -149,6 +150,6 @@
     }
 
     return confirmed;
-  });
+  })
 
 })(jQuery);

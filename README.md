@@ -27,7 +27,8 @@ And then require the Javascript from your `application.js`:
 ## Usage
 
 By default, the overrides Rails' default behaviour for you, with no change
-required to your code.
+required to your code. The modal is applicable to `<a>`, `<button>` and `<input[submit]>` 
+elements.
 
 The modal's title will be get from the link's `title` attribute value. The
 modal text will be taken from the `data-confirm` value. Multiple paragraphs
