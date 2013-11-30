@@ -31,7 +31,9 @@
   var defaults = {
     title: 'Are you ABSOLUTELY sure?',
     commit: 'Confirm',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[data-confirm]'],
+    input_types: ['button', 'checkbox', 'submit', 'reset']
   };
 
   var settings;
@@ -136,19 +138,22 @@
    * A modal is considered 'confirmed' when an user has successfully clicked
    * the 'confirm' button in it.
    */
-  $(document).delegate('a[data-confirm], button[data-confirm], input[data-confirm]', 'confirm', function (e) {
-    var element = $(this), modal = getModal(element);
-    var confirmed = modal.data('confirmed');
 
-    if (!confirmed && !modal.is(':visible')) {
-      modal.modal('show');
+  $(document).delegate(elements.join(' '), 'confirm', function() {
+    if($.inArray(this.type, input_types) === -1) {
+      var element = $(this), modal = getModal(element);
+      var confirmed = modal.data('confirmed');
 
-      var confirm = $.rails.confirm;
-      $.rails.confirm = function () { return modal.data('confirmed'); }
-      modal.on('hide', function () { $.rails.confirm = confirm; });
+      if (!confirmed && !modal.is(':visible')) {
+        modal.modal('show');
+
+        var confirm = $.rails.confirm;
+        $.rails.confirm = function () { return modal.data('confirmed'); }
+        modal.on('hide', function () { $.rails.confirm = confirm; });
+      }
+
+      return confirmed;
     }
-
-    return confirmed;
-  });
+  })
 
 })(jQuery);
