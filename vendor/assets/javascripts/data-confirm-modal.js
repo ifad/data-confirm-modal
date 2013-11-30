@@ -32,7 +32,7 @@
     title: 'Are you ABSOLUTELY sure?',
     commit: 'Confirm',
     cancel: 'Cancel',
-    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[submit][data-confirm]']
+    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
   };
 
   var settings;
