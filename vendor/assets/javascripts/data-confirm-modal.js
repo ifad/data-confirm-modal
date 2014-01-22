@@ -53,22 +53,26 @@
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
 
     var modal = $(
-      '<div id="'+id+'" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
-        '<div class="modal-header">' +
-          '<button class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
-          '<h3 id="'+id+'Label"></h3> ' +
-        '</div>' +
-        '<div class="modal-body"></div>' +
-        '<div class="modal-footer">' +
-          '<button class="btn" data-dismiss="modal" aria-hidden="true">' + settings.cancel + '</button>' +
-          '<button class="btn btn-danger commit"></button>' +
+      '<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
+        '<div class="modal-dialog">' +
+          '<div class="modal-content">' +
+            '<div class="modal-header">' +
+              '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+              '<h4 id="'+id+'Label" class="modal-title"></h4> ' +
+            '</div>' +
+            '<div class="modal-body"></div>' +
+            '<div class="modal-footer">' +
+              '<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">' + settings.cancel + '</button>' +
+              '<button class="btn btn-danger commit"></button>' +
+            '</div>'+
+          '</div>'+
         '</div>'+
       '</div>'
     );
 
     var title = element.attr('title') || element.data('original-title') || settings.title;
 
-    modal.find('.modal-header h3').text(title);
+    modal.find('.modal-title').text(title);
 
     var body = modal.find('.modal-body');
 
