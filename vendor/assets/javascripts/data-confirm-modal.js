@@ -14,6 +14,7 @@
    *  * `data-confirm`: Contains the modal body text. HTML is allowed.
    *                    Separate multiple paragraphs using \n\n.
    *  * `data-commit`:  The 'confirm' button text. "Confirm" by default.
+   *  * `data-cancel`:  The 'cancel' button text. "Cancel" by default.
    *  * `data-verify`:  Adds a text input in which the user has to input
    *                    the text in this attribute value for the 'confirm'
    *                    button to be clickable. Optional.
@@ -23,7 +24,8 @@
    *    dataConfirmModal.setDefaults({
    *      title: 'Confirm your action',
    *      commit: 'Continue',
-   *      cancel: 'Cancel'
+   *      cancel: 'Cancel',
+   *      verifyClass: 'form-control',
    *    });
    *
    */
@@ -32,6 +34,7 @@
     title: 'Are you ABSOLUTELY sure?',
     commit: 'Confirm',
     cancel: 'Cancel',
+    verifyClass: '',
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
   };
 
@@ -62,7 +65,7 @@
             '</div>' +
             '<div class="modal-body"></div>' +
             '<div class="modal-footer">' +
-              '<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">' + settings.cancel + '</button>' +
+              '<button class="btn btn-default cancel" data-dismiss="modal" aria-hidden="true"></button>' +
               '<button class="btn btn-danger commit"></button>' +
             '</div>'+
           '</div>'+
@@ -83,6 +86,9 @@
     var commit = modal.find('.commit');
     commit.text(element.data('commit') || settings.commit);
 
+    var cancel = modal.find('.cancel');
+    cancel.text(element.data('cancel') || settings.cancel);
+
     if(element.data('remote')){
       commit.attr('data-dismiss', 'modal');
     }
@@ -91,7 +97,7 @@
     if (verify) {
       commit.prop('disabled', true);
 
-      var verification = $('<input/>', {type: 'text'}).on('keyup', function () {
+      var verification = $('<input/>', {type: 'text', class: settings.verifyClass}).on('keyup', function () {
         commit.prop('disabled', $(this).val() !== verify);
       });
 
