@@ -94,11 +94,24 @@
     }
 
     var verify = element.data('verify');
-    if (verify) {
+    var regexp = element.data('verify-regexp');
+
+    if (verify || regexp) {
       commit.prop('disabled', true);
 
+      var caseInsensitive = element.data('verify-regexp-caseinsensitive');
+      var re = (regexp) ? new RegExp(regexp, (caseInsensitive) ? "i" : "") : null;
+
+      var isMatch = function(input) {
+        if (re) {
+          return input.match(re);
+        }
+
+        return verify === input;
+      }
+
       var verification = $('<input/>', {type: 'text', class: settings.verifyClass}).on('keyup', function () {
-        commit.prop('disabled', $(this).val() !== verify);
+        commit.prop('disabled', !isMatch($(this).val()));
       });
 
       modal.on('shown', function () {
