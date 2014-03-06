@@ -99,15 +99,14 @@
     if (verify || regexp) {
       commit.prop('disabled', true);
 
-      var caseInsensitive = element.data('verify-regexp-caseinsensitive');
-      var re = (regexp) ? new RegExp(regexp, (caseInsensitive) ? "i" : "") : null;
+      var isMatch;
+      if (regexp) {
+        var caseInsensitive = element.data('verify-regexp-caseinsensitive');
+        var re = new RegExp(regexp, caseInsensitive ? 'i' : '');
 
-      var isMatch = function(input) {
-        if (re) {
-          return input.match(re);
-        }
-
-        return verify === input;
+        isMatch = function (input) { return input.match(re) };
+      } else {
+        isMatch = function (input) { return verify == input };
       }
 
       var verification = $('<input/>', {type: 'text', class: settings.verifyClass}).on('keyup', function () {
