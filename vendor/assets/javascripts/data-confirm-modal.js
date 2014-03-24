@@ -33,7 +33,9 @@
   var defaults = {
     title: 'Are you ABSOLUTELY sure?',
     commit: 'Confirm',
+    commitClass: 'btn-danger',
     cancel: 'Cancel',
+    cancelClass: 'btn-default',
     verifyClass: '',
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
   };
@@ -65,8 +67,8 @@
             '</div>' +
             '<div class="modal-body"></div>' +
             '<div class="modal-footer">' +
-              '<button class="btn btn-default cancel" data-dismiss="modal" aria-hidden="true"></button>' +
-              '<button class="btn btn-danger commit"></button>' +
+              '<button class="btn cancel" data-dismiss="modal" aria-hidden="true"></button>' +
+              '<button class="btn commit"></button>' +
             '</div>'+
           '</div>'+
         '</div>'+
@@ -85,9 +87,11 @@
 
     var commit = modal.find('.commit');
     commit.text(element.data('commit') || settings.commit);
+    commit.addClass(element.data('commit-class') || settings.commitClass);
 
     var cancel = modal.find('.cancel');
     cancel.text(element.data('cancel') || settings.cancel);
+    cancel.addClass(element.data('cancel-class') || settings.cancelClass);
 
     if(element.data('remote')){
       commit.attr('data-dismiss', 'modal');
