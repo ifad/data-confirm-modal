@@ -16,11 +16,15 @@ Add this line to your application's Gemfile:
 
     gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
+if you are stuck on Bootstrap 2.3, use the `bootstrap2` branch:
+
+    gem 'data-confirm-modal', github: 'ifad/data-confirm-modal', branch: 'bootstrap2'
+
 Then execute:
 
     $ bundle
 
-And then require the Javascript from your `application.js`:
+And then require the Javascript from your application.js`:
 
     //= require data-confirm-modal
 
