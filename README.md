@@ -24,7 +24,7 @@ Then execute:
 
     $ bundle
 
-And then require the Javascript from your application.js`:
+And then require the Javascript from your `application.js`:
 
     //= require data-confirm-modal
 
