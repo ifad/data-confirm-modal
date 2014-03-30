@@ -172,6 +172,7 @@
 
       var confirm = $.rails.confirm;
       $.rails.confirm = function () { return modal.data('confirmed'); }
+      modal.on('shown.bs.modal', function () { modal.find('.commit').focus(); });
       modal.on('hide', function () { $.rails.confirm = confirm; });
     }
 
