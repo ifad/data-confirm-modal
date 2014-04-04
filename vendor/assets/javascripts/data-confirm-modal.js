@@ -18,8 +18,9 @@
    *  * `data-verify`:  Adds a text input in which the user has to input
    *                    the text in this attribute value for the 'confirm'
    *                    button to be clickable. Optional.
-   *  * `data-focus`:   Focus input selector. Supported values are 
-   *                    'cancel' or 'commit', "commit" by default.
+   *  * `data-focus`:   Define focused input. Supported values are 
+   *                    'cancel' or 'commit', 'cancel' is default for 
+   *                    data-method DELETE, 'commit' for all others.
    *
    * You can set global setting using `dataConfirmModal.setDefaults`, for example:
    *
@@ -39,7 +40,8 @@
     cancel: 'Cancel',
     cancelClass: 'btn-default',
     verifyClass: '',
-    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
+    elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]'],
+    focus: 'commit'
   };
 
   var settings;
@@ -174,7 +176,14 @@
 
       var confirm = $.rails.confirm;
       $.rails.confirm = function () { return modal.data('confirmed'); }
-      var focus_element = element.data('focus') || 'commit';
+      var focus_element;
+      if (element.data('focus')) {
+        focus_element = element.data('focus');
+      } else if (element.data('method')=='delete') {
+        focus_element = 'cancel'
+      } else {
+        focus_element = settings.focus;
+      }
       modal.on('shown.bs.modal', function () { modal.find('.' + focus_element).focus(); });
       modal.on('hide', function () { $.rails.confirm = confirm; });
     }
