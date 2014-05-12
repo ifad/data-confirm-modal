@@ -25,6 +25,7 @@
    *      title: 'Confirm your action',
    *      commit: 'Continue',
    *      cancel: 'Cancel',
+   *      fade:   false,
    *      verifyClass: 'form-control',
    *    });
    *
@@ -36,6 +37,7 @@
     commitClass: 'btn-danger',
     cancel: 'Cancel',
     cancelClass: 'btn-default',
+    fade: true,
     verifyClass: '',
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]']
   };
@@ -56,9 +58,11 @@
 
   var buildModal = function (element) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
-
+    var fadeStr = '';
+    if(settings.fade)
+      fade = ' fade';
     var modal = $(
-      '<div id="'+id+'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
+      '<div id="'+id+'" class="modal'+fadeStr+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
         '<div class="modal-dialog">' +
           '<div class="modal-content">' +
             '<div class="modal-header">' +
