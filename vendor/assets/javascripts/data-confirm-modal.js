@@ -18,8 +18,8 @@
    *  * `data-verify`:  Adds a text input in which the user has to input
    *                    the text in this attribute value for the 'confirm'
    *                    button to be clickable. Optional.
-   *  * `data-focus`:   Define focused input. Supported values are 
-   *                    'cancel' or 'commit', 'cancel' is default for 
+   *  * `data-focus`:   Define focused input. Supported values are
+   *                    'cancel' or 'commit', 'cancel' is default for
    *                    data-method DELETE, 'commit' for all others.
    *
    * You can set global setting using `dataConfirmModal.setDefaults`, for example:
