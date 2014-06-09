@@ -58,6 +58,7 @@ To restore default settings use `dataConfirmModal.restoreDefaults()`.
 
 * Marcello Barnaba ([@vjt](https://github.com/vjt))
 * LLeir Borras Metje ([@lleirborras](https://github.com/lleirborras))
+* The Open Source [World](https://github.com/ifad/data-confirm-modal/graphs/contributors)
 
 ## Background
 
