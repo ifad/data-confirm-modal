@@ -117,7 +117,7 @@
         isMatch = function (input) { return verify == input };
       }
 
-      var verification = $('<input/>', {type: 'text', class: settings.verifyClass}).on('keyup', function () {
+      var verification = $('<input/>', {"type": 'text', "class": settings.verifyClass}).on('keyup', function () {
         commit.prop('disabled', !isMatch($(this).val()));
       });
 
