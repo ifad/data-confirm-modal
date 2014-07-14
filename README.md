@@ -41,8 +41,9 @@ are created automatically from two newlines (`\n\n`).
 The modal's 'confirm' button text can be customized using the `data-commit`
 attribute.
 
-If you want to add a verification input, use a `data-verify` attribute, whose
-value is what you want your user to input.
+Add a `data-verify` attribute to your input if you want an extra confirmation
+from the user. The modal will contain an extra text input, and the user will be
+asked to type the verification value before being allowed to proceed.
 
 You can set global setting using `dataConfirmModal.setDefaults`, for example:
 
