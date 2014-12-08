@@ -18,6 +18,7 @@
    *  * `data-verify`:  Adds a text input in which the user has to input
    *                    the text in this attribute value for the 'confirm'
    *                    button to be clickable. Optional.
+   *  * `data-verify-text`:  Adds a label for the data-verify input. Optional
    *  * `data-focus`:   Define focused input. Supported values are
    *                    'cancel' or 'commit', 'cancel' is default for
    *                    data-method DELETE, 'commit' for all others.
@@ -35,7 +36,7 @@
    */
 
   var defaults = {
-    title: 'Are you ABSOLUTELY sure?',
+    title: 'Are you sure?',
     commit: 'Confirm',
     commitClass: 'btn-danger',
     cancel: 'Cancel',
@@ -104,6 +105,7 @@
       commit.attr('data-dismiss', 'modal');
     }
 
+    var verify_label = element.data('verify-text');
     var verify = element.data('verify');
     var regexp = element.data('verify-regexp');
 
@@ -120,6 +122,8 @@
         isMatch = function (input) { return verify == input };
       }
 
+      var verify_label_text = $('<p>', {text: verify_label});
+
       var verification = $('<input/>', {"type": 'text', "class": settings.verifyClass}).on('keyup', function () {
         commit.prop('disabled', !isMatch($(this).val()));
       });
@@ -131,7 +135,7 @@
       modal.on('hide', function () {
         verification.val('').trigger('keyup');
       });
-
+      body.append(verify_label_text)
       body.append(verification);
     }
 
