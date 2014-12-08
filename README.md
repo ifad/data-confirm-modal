@@ -30,6 +30,8 @@ And then require the Javascript from your `application.js`:
 
 ## Usage
 
+### With Rails
+
 By default, the overrides Rails' default behaviour for you, with no change
 required to your code. The modal is applicable to `<a>`, `<button>` and `<input[submit]>` 
 elements.
@@ -54,6 +56,36 @@ You can set global setting using `dataConfirmModal.setDefaults`, for example:
     });
 
 To restore default settings use `dataConfirmModal.restoreDefaults()`.
+
+### Without Rails, with data attributes
+
+Given an element with `data-confirm` attributes in place, such as
+
+    <a id="foo" href="#" data-confirm="Really do this?" data-commit="Do it" data-cancel="Not really"/>
+
+you can invoke `.confirmModal()` on it:
+
+    $('#foo').confirmModal();
+
+that'll display the confirmation modal. If the user confirms, then the `#foo`
+link will receive a `click` event.
+
+### Without Rails, without data attributes
+
+Use `dataConfirmModal.confirm()` passing any of the supported options, and pass
+an `onConfirm` and `onCancel` callbacks that'll be invoked when the user clicks
+the confirm or the cancel buttons.
+
+    dataConfirmModal.confirm({
+      title: 'Are you sure?',
+      text: 'Really do this?',
+      commit: 'Yes do it',
+      cancel: 'Not really',
+      onConfirm: function() { alert('confirmed') },
+      onCancel:  function() { alert('cancelled') }
+    });
+
+A live jsfiddle example is [available here](http://jsfiddle.net/t0m7ayr3/).
 
 ## Authors
 

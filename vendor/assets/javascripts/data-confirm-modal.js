@@ -56,12 +56,64 @@
 
     restoreDefaults: function () {
       settings = $.extend({}, defaults);
+    },
+
+    confirm: function (options) {
+      // Build an ephemeral modal
+      //
+      var modal = buildModal (options);
+
+      modal.modal('show');
+      modal.on('hidden.bs.modal', function () {
+        modal.remove();
+      });
+
+      modal.find('.commit').on('click', function () {
+        if (options.onSuccess && options.onSuccess.call)
+          options.onSuccess.call();
+
+        modal.modal('hide');
+      });
+
+      modal.find('.cancel').on('click', function () {
+        if (options.onCancel && options.onCancel.call)
+          options.onCancel.call();
+
+        modal.modal('hide');
+      });
     }
   };
 
   dataConfirmModal.restoreDefaults();
 
-  var buildModal = function (element) {
+  var buildElementModal = function (element) {
+    var options = {
+      title:        element.attr('title') || element.data('original-title'),
+      text:         element.data('confirm'),
+      commit:       element.data('commit'),
+      commitClass:  element.data('commit-class'),
+      cancel:       element.data('cancel'),
+      cancelClass:  element.data('cancel-class'),
+      remote:       element.data('remote'),
+      verify:       element.data('verify'),
+      verifyRegexp: element.data('verify-regexp'),
+      verifyLabel:  element.data('verify-text'),
+      verifyRegexpCaseInsensitive: element.data('verify-regexp-caseinsensitive')
+    };
+
+    var modal = buildModal (options);
+
+    modal.data('confirmed', false);
+    modal.find('.commit').on('click', function () {
+      modal.data('confirmed', true);
+      element.trigger('click');
+      modal.modal('hide');
+    });
+
+    return modal;
+  }
+
+  var buildModal = function (options) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
     var fade = settings.fade ? 'fade' : '';
 
@@ -83,46 +135,38 @@
       '</div>'
     );
 
-    var title = element.attr('title') || element.data('original-title') || settings.title;
-
-    modal.find('.modal-title').text(title);
+    modal.find('.modal-title').text(options.title || settings.title);
 
     var body = modal.find('.modal-body');
 
-    $.each(element.data('confirm').split(/\n{2}/), function (i, piece) {
+    $.each((options.text||'').split(/\n{2}/), function (i, piece) {
       body.append($('<p/>').html(piece));
     });
 
     var commit = modal.find('.commit');
-    commit.text(element.data('commit') || settings.commit);
-    commit.addClass(element.data('commit-class') || settings.commitClass);
+    commit.text(options.commit || settings.commit);
+    commit.addClass(options.commitClass || settings.commitClass);
 
     var cancel = modal.find('.cancel');
-    cancel.text(element.data('cancel') || settings.cancel);
-    cancel.addClass(element.data('cancel-class') || settings.cancelClass);
+    cancel.text(options.cancel || settings.cancel);
+    cancel.addClass(options.cancelClass || settings.cancelClass);
 
-    if(element.data('remote')){
+    if (options.remote) {
       commit.attr('data-dismiss', 'modal');
     }
 
-    var verify_label = element.data('verify-text');
-    var verify = element.data('verify');
-    var regexp = element.data('verify-regexp');
-
-    if (verify || regexp) {
+    if (options.verify || options.verifyRegexp) {
       commit.prop('disabled', true);
 
       var isMatch;
-      if (regexp) {
-        var caseInsensitive = element.data('verify-regexp-caseinsensitive');
+      if (options.verifyRegexp) {
+        var caseInsensitive = options.verifyRegexpCaseInsensitive;
         var re = new RegExp(regexp, caseInsensitive ? 'i' : '');
 
         isMatch = function (input) { return input.match(re) };
       } else {
-        isMatch = function (input) { return verify == input };
+        isMatch = function (input) { return options.verify == input };
       }
-
-      var verify_label_text = $('<p>', {text: verify_label});
 
       var verification = $('<input/>', {"type": 'text', "class": settings.verifyClass}).on('keyup', function () {
         commit.prop('disabled', !isMatch($(this).val()));
@@ -135,16 +179,12 @@
       modal.on('hide', function () {
         verification.val('').trigger('keyup');
       });
-      body.append(verify_label_text)
+
+      if (options.verifyLabel)
+        body.append($('<p>', {text: options.verifyLabel}))
+
       body.append(verification);
     }
-
-    modal.data('confirmed', false);
-    commit.on('click', function () {
-      modal.data('confirmed', true);
-      element.trigger('click');
-      modal.modal('hide');
-    });
 
     $('body').append(modal);
 
@@ -157,12 +197,18 @@
    * caching it into the element's `confirm-modal` data attribute.
    */
   var getModal = function (element) {
-    var modal = element.data('confirm-modal') || buildModal(element);
+    var modal = element.data('confirm-modal') || buildElementModal(element);
 
     if (modal && !element.data('confirm-modal'))
       element.data('confirm-modal', modal);
 
     return modal;
+  };
+
+  $.fn.confirmModal = function () {
+    getModal($(this)).modal('show');
+
+    return this;
   };
 
   if ($.rails) {
