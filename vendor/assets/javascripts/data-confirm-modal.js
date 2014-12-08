@@ -105,7 +105,7 @@
       commit.attr('data-dismiss', 'modal');
     }
 
-    var verify_label = element.data('verify-label');
+    var verify_label = element.data('verify-text');
     var verify = element.data('verify');
     var regexp = element.data('verify-regexp');
 
