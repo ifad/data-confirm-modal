@@ -90,6 +90,8 @@
     var options = {
       title:        element.attr('title') || element.data('original-title'),
       text:         element.data('confirm'),
+      focus:        element.data('focus'),
+      method:       element.data('method'),
       commit:       element.data('commit'),
       commitClass:  element.data('commit-class'),
       cancel:       element.data('cancel'),
@@ -186,6 +188,20 @@
       body.append(verification);
     }
 
+    var focus_element;
+    if (options.focus) {
+      focus_element = options.focus;
+    } else if (options.method == 'delete') {
+      focus_element = 'cancel'
+    } else {
+      focus_element = settings.focus;
+    }
+    focus_element = modal.find('.' + focus_element);
+
+    modal.on('shown.bs.modal', function () {
+      focus_element.focus();
+    });
+
     $('body').append(modal);
 
     return modal;
@@ -230,15 +246,6 @@
 
         var confirm = $.rails.confirm;
         $.rails.confirm = function () { return modal.data('confirmed'); }
-        var focus_element;
-        if (element.data('focus')) {
-          focus_element = element.data('focus');
-        } else if (element.data('method')=='delete') {
-          focus_element = 'cancel'
-        } else {
-          focus_element = settings.focus;
-        }
-        modal.on('shown.bs.modal', function () { modal.find('.' + focus_element).focus(); });
         modal.on('hide', function () { $.rails.confirm = confirm; });
       }
 
