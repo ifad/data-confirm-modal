@@ -163,39 +163,41 @@
       element.data('confirm-modal', modal);
 
     return modal;
-  }
+  };
 
-  /**
-   * Attaches to the Rails' UJS adapter 'confirm' event on links having a
-   * `data-confirm` attribute. Temporarily overrides the `$.rails.confirm`
-   * function with an anonymous one that returns the 'confirmed' status of
-   * the modal.
-   *
-   * A modal is considered 'confirmed' when an user has successfully clicked
-   * the 'confirm' button in it.
-   */
-  $(document).delegate(settings.elements.join(', '), 'confirm', function() {
-    var element = $(this), modal = getModal(element);
-    var confirmed = modal.data('confirmed');
+  if ($.rails) {
+    /**
+     * Attaches to the Rails' UJS adapter 'confirm' event on links having a
+     * `data-confirm` attribute. Temporarily overrides the `$.rails.confirm`
+     * function with an anonymous one that returns the 'confirmed' status of
+     * the modal.
+     *
+     * A modal is considered 'confirmed' when an user has successfully clicked
+     * the 'confirm' button in it.
+     */
+    $(document).delegate(settings.elements.join(', '), 'confirm', function() {
+      var element = $(this), modal = getModal(element);
+      var confirmed = modal.data('confirmed');
 
-    if (!confirmed && !modal.is(':visible')) {
-      modal.modal('show');
+      if (!confirmed && !modal.is(':visible')) {
+        modal.modal('show');
 
-      var confirm = $.rails.confirm;
-      $.rails.confirm = function () { return modal.data('confirmed'); }
-      var focus_element;
-      if (element.data('focus')) {
-        focus_element = element.data('focus');
-      } else if (element.data('method')=='delete') {
-        focus_element = 'cancel'
-      } else {
-        focus_element = settings.focus;
+        var confirm = $.rails.confirm;
+        $.rails.confirm = function () { return modal.data('confirmed'); }
+        var focus_element;
+        if (element.data('focus')) {
+          focus_element = element.data('focus');
+        } else if (element.data('method')=='delete') {
+          focus_element = 'cancel'
+        } else {
+          focus_element = settings.focus;
+        }
+        modal.on('shown.bs.modal', function () { modal.find('.' + focus_element).focus(); });
+        modal.on('hide', function () { $.rails.confirm = confirm; });
       }
-      modal.on('shown.bs.modal', function () { modal.find('.' + focus_element).focus(); });
-      modal.on('hide', function () { $.rails.confirm = confirm; });
-    }
 
-    return confirmed;
-  })
+      return confirmed;
+    });
+  }
 
 })(jQuery);
