@@ -69,8 +69,8 @@
       });
 
       modal.find('.commit').on('click', function () {
-        if (options.onSuccess && options.onSuccess.call)
-          options.onSuccess.call();
+        if (options.onConfirm && options.onConfirm.call)
+          options.onConfirm.call();
 
         modal.modal('hide');
       });
