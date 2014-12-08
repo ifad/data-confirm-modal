@@ -36,7 +36,7 @@
    */
 
   var defaults = {
-    title: 'Are you ABSOLUTELY sure?',
+    title: 'Are you sure?',
     commit: 'Confirm',
     commitClass: 'btn-danger',
     cancel: 'Cancel',
