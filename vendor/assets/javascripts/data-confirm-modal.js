@@ -137,6 +137,10 @@
       '</div>'
     );
 
+    // Make sure it's always the top zindex
+    zindex = $('.modal.in').not('#'+id).css('z-index')
+    modal.css('z-index', parseInt(zindex) + 1)
+
     modal.find('.modal-title').text(options.title || settings.title);
 
     var body = modal.find('.modal-body');
