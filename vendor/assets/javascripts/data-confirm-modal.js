@@ -83,6 +83,10 @@
       '</div>'
     );
 
+    // Make sure the z-index of this confim is always the top most modal
+    zindex = $('.modal.in').not('#'+id).css('z-index');
+    modal.css('z-index', parseInt(zindex) + 1);
+
     var title = element.attr('title') || element.data('original-title') || settings.title;
 
     modal.find('.modal-title').text(title);
