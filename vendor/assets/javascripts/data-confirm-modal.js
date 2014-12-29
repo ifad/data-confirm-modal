@@ -138,8 +138,14 @@
     );
 
     // Make sure it's always the top zindex
-    zindex = $('.modal.in').not('#'+id).css('z-index')
-    modal.css('z-index', parseInt(zindex) + 1)
+    var highest = 1050;
+    $('.modal.in').not('#'+id).each(function() {
+      current = parseInt($(this).css('z-index'), 10);
+      if(current > highest) {
+        highest = current
+      }
+      modal.css('z-index', parseInt(highest) + 1);
+    });
 
     modal.find('.modal-title').text(options.title || settings.title);
 
