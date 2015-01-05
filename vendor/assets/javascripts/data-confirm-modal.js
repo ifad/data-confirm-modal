@@ -144,8 +144,8 @@
       if(current > highest) {
         highest = current
       }
-      modal.css('z-index', parseInt(highest) + 1);
     });
+    modal.css('z-index', parseInt(highest) + 1);
 
     modal.find('.modal-title').text(options.title || settings.title);
 
