@@ -138,7 +138,7 @@
     );
 
     // Make sure it's always the top zindex
-    var highest = current = $('.modal.in:last').css('z-index');
+    var highest = current = 0;
     $('.modal.in').not('#'+id).each(function() {
       current = parseInt($(this).css('z-index'), 10);
       if(current > highest) {
