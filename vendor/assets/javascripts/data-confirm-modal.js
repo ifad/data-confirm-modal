@@ -137,6 +137,16 @@
       '</div>'
     );
 
+    // Make sure it's always the top zindex
+    var highest = current = $('.modal.in:last').css('z-index');
+    $('.modal.in').not('#'+id).each(function() {
+      current = parseInt($(this).css('z-index'), 10);
+      if(current > highest) {
+        highest = current
+      }
+    });
+    modal.css('z-index', parseInt(highest) + 1);
+
     modal.find('.modal-title').text(options.title || settings.title);
 
     var body = modal.find('.modal-body');
