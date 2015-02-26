@@ -173,6 +173,7 @@
       var isMatch;
       if (options.verifyRegexp) {
         var caseInsensitive = options.verifyRegexpCaseInsensitive;
+        var regexp = options.verifyRegexp;
         var re = new RegExp(regexp, caseInsensitive ? 'i' : '');
 
         isMatch = function (input) { return input.match(re) };
