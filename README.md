@@ -81,6 +81,7 @@ the confirm or the cancel buttons.
       text: 'Really do this?',
       commit: 'Yes do it',
       cancel: 'Not really',
+      zIindex: 10099,
       onConfirm: function() { alert('confirmed') },
       onCancel:  function() { alert('cancelled') }
     });
