@@ -120,7 +120,7 @@
   var buildModal = function (options) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
     var fade = settings.fade ? 'fade' : '';
-    var customClass = settings.customClass ? customClass : '';
+    var customClass = settings.customClass ? settings.customClass : '';
 
     var modal = $(
       '<div id="'+id+'" class="modal '+fade+' '+customClass+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
