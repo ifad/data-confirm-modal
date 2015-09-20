@@ -46,7 +46,8 @@
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]'],
     focus: 'commit',
     zIndex: 1050,
-    modalClass: false
+    modalClass: false,
+    backdrop: false
   };
 
   var settings;
@@ -64,8 +65,9 @@
       // Build an ephemeral modal
       //
       var modal = buildModal (options);
-
-      modal.modal('show');
+      var modal_options = { backdrop: settings.backdrop };
+      
+      modal.modal(modal_options);
       modal.on('hidden.bs.modal', function () {
         modal.remove();
       });
@@ -236,7 +238,9 @@
   };
 
   $.fn.confirmModal = function () {
-    getModal($(this)).modal('show');
+    var modal_options = { backdrop: settings.backdrop };
+    
+    getModal($(this)).modal(modal_options);
 
     return this;
   };
@@ -254,9 +258,10 @@
     $(document).delegate(settings.elements.join(', '), 'confirm', function() {
       var element = $(this), modal = getModal(element);
       var confirmed = modal.data('confirmed');
+      var modal_options = { backdrop: settings.backdrop };
 
       if (!confirmed && !modal.is(':visible')) {
-        modal.modal('show');
+        modal.modal(modal_options);
 
         var confirm = $.rails.confirm;
         $.rails.confirm = function () { return modal.data('confirmed'); }
