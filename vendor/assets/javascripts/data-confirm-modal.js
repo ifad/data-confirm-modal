@@ -51,7 +51,7 @@
 
     confirm: function (options) {
       // Build an ephemeral modal
-      var modal = buildEphimeralModal(options);
+      var modal = buildEphemeralModal(options);
 
       modal.modal('show');
       modal.on('hidden.bs.modal', function () {
@@ -77,9 +77,9 @@
   dataConfirmModal.restoreDefaults();
 
   // Just a hotfix for allowing that this lib supports
-  // the creation of an ephimeral confirmation but using
+  // the creation of an ephemeral confirmation but using
   // the current implementation (designed for bootstrap 2)
-  var buildEphimeralModal = function(object) {
+  var buildEphemeralModal = function(object) {
     var properties = [];
     for (var property in object) {
       if (typeof object[property] != 'function') {
