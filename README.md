@@ -88,6 +88,17 @@ the confirm or the cancel buttons.
 
 A live jsfiddle example is [available here](http://jsfiddle.net/t0m7ayr3/).
 
+### Modal Options
+
+The default [bootstrap modal options](http://getbootstrap.com/javascript/#modals-options)
+can be passed either via JavaScript or through data attributes.
+
+     $('#foo').confirmModal({backdrop: 'static', keyboard: false});
+
+or
+
+     <a href="#" data-confirm="Really?" data-backdrop="static" data-keyboard="false">
+
 ## Authors
 
 * Marcello Barnaba ([@vjt](https://github.com/vjt))
