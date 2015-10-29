@@ -46,7 +46,8 @@
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]'],
     focus: 'commit',
     zIndex: 1050,
-    modalClass: false
+    modalClass: false,
+    show: true
   };
 
   var settings;
@@ -63,9 +64,9 @@
     confirm: function (options) {
       // Build an ephemeral modal
       //
-      var modal = buildModal (options);
+      var modal = buildModal(options);
 
-      modal.modal('show');
+      modal.spawn();
       modal.on('hidden.bs.modal', function () {
         modal.remove();
       });
@@ -102,10 +103,13 @@
       verify:       element.data('verify'),
       verifyRegexp: element.data('verify-regexp'),
       verifyLabel:  element.data('verify-text'),
-      verifyRegexpCaseInsensitive: element.data('verify-regexp-caseinsensitive')
+      verifyRegexpCaseInsensitive: element.data('verify-regexp-caseinsensitive'),
+      backdrop:     element.data('backdrop'),
+      keyboard:     element.data('keyboard'),
+      show:         element.data('show')
     };
 
-    var modal = buildModal (options);
+    var modal = buildModal(options);
 
     modal.data('confirmed', false);
     modal.find('.commit').on('click', function () {
@@ -218,6 +222,14 @@
 
     $('body').append(modal);
 
+    modal.spawn = function() {
+      return modal.modal({
+        backdrop: options.backdrop,
+        keyboard: options.keyboard,
+        show:     options.show
+      });
+    };
+
     return modal;
   };
 
@@ -236,7 +248,7 @@
   };
 
   $.fn.confirmModal = function () {
-    getModal($(this)).modal('show');
+    getModal($(this)).spawn();
 
     return this;
   };
@@ -256,7 +268,7 @@
       var confirmed = modal.data('confirmed');
 
       if (!confirmed && !modal.is(':visible')) {
-        modal.modal('show');
+        modal.spawn();
 
         var confirm = $.rails.confirm;
         $.rails.confirm = function () { return modal.data('confirmed'); }
