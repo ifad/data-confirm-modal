@@ -47,7 +47,7 @@
     focus: 'commit',
     zIndex: 1050,
     modalClass: false,
-    modal: {show: true}
+    show: true
   };
 
   var settings;
@@ -104,12 +104,9 @@
       verifyRegexp: element.data('verify-regexp'),
       verifyLabel:  element.data('verify-text'),
       verifyRegexpCaseInsensitive: element.data('verify-regexp-caseinsensitive'),
-
-      modal: {
-        backdrop: element.data('backdrop'),
-        keyboard: element.data('keyboard'),
-        show:     element.data('show')
-      }
+      backdrop:     element.data('backdrop'),
+      keyboard:     element.data('keyboard'),
+      show:         element.data('show')
     };
 
     var modal = buildModal(options);
@@ -226,7 +223,11 @@
     $('body').append(modal);
 
     modal.spawn = function() {
-      return modal.modal(options.modal);
+      return modal.modal({
+        backdrop: options.backdrop,
+        keyboard: options.keyboard,
+        show:     options.show
+      });
     };
 
     return modal;
