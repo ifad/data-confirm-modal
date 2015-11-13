@@ -47,10 +47,58 @@
 
     restoreDefaults: function () {
       settings = $.extend({}, defaults);
+    },
+
+    confirm: function (options) {
+      // Build an ephemeral modal
+      var modal = buildEphemeralModal(options);
+
+      modal.modal('show');
+      modal.on('hidden.bs.modal', function () {
+        modal.remove();
+      });
+
+      modal.find('.commit').on('click', function () {
+        if (options.onConfirm && options.onConfirm.call)
+          options.onConfirm.call();
+
+        modal.modal('hide');
+      });
+
+      modal.find('.cancel').on('click', function () {
+        if (options.onCancel && options.onCancel.call)
+          options.onCancel.call();
+
+        modal.modal('hide');
+      });
+
+      return modal;
     }
   };
 
   dataConfirmModal.restoreDefaults();
+
+  // Just a hotfix for allowing that this lib supports
+  // the creation of an ephemeral confirmation but using
+  // the current implementation (designed for bootstrap 2)
+  var buildEphemeralModal = function(object) {
+    $tempElement = $('<div/>');
+
+    for(var property in object) {
+      var value = object[property];
+
+      if (typeof(value) == 'function')
+	continue;
+
+      switch(property) {
+      case 'title': $tempElement.attr(property,  value); break;
+      case 'text':  $tempElement.data('confirm', value); break;
+      default:      $tempElement.data(property,  value); break;
+      }
+    }
+
+    return buildModal($tempElement);
+  }
 
   var buildModal = function (element) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
