@@ -82,22 +82,20 @@
   // the creation of an ephemeral confirmation but using
   // the current implementation (designed for bootstrap 2)
   var buildEphemeralModal = function(object) {
-    var properties = [];
-    for (var property in object) {
-      if (typeof object[property] != 'function') {
-        properties.push(property);
-      }
-    }
-
     $tempElement = $('<div/>');
 
-    $.each(properties, function(index, property){
+    for(var property in object) {
+      var value = object[property];
+
+      if (typeof(value) == 'function')
+	continue;
+
       switch(property) {
-      case 'title': $tempElement.attr(property, object[property]);  break;
-      case 'text':  $tempElement.data('confirm', object[property]); break;
-      default:      $tempElement.data(property, object[property]);  break;
+      case 'title': $tempElement.attr(property,  value); break;
+      case 'text':  $tempElement.data('confirm', value); break;
+      default:      $tempElement.data(property,  value); break;
       }
-    });
+    }
 
     return buildModal($tempElement);
   }
