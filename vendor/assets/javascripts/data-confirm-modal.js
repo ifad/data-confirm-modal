@@ -92,9 +92,13 @@
     $tempElement = $('<div/>');
 
     $.each(properties, function(index, property){
-      property != 'title' ? $tempElement.data(property, object[property]) : $tempElement.attr(property, object[property])
+      switch(property) {
+      case 'title': $tempElement.attr(property, object[property]);  break;
+      case 'text':  $tempElement.data('confirm', object[property]); break;
+      default:      $tempElement.data(property, object[property]);  break;
+      }
     });
-    if($tempElement.data('confirm') == undefined){ $tempElement.data('confirm', '') }
+
     return buildModal($tempElement);
   }
 
