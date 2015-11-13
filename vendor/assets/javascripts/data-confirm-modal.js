@@ -192,11 +192,11 @@
         commit.prop('disabled', !isMatch($(this).val()));
       });
 
-      modal.on('shown', function () {
+      modal.on('shown.bs.modal', function () {
         verification.focus();
       });
 
-      modal.on('hide', function () {
+      modal.on('hidden.bs.modal', function () {
         verification.val('').trigger('keyup');
       });
 
