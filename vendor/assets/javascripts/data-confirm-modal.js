@@ -88,7 +88,9 @@
         properties.push(property);
       }
     }
-    $tempElement = $('<div style="display:hidden;"></div>');
+
+    $tempElement = $('<div/>');
+
     $.each(properties, function(index, property){
       property != 'title' ? $tempElement.data(property, object[property]) : $tempElement.attr(property, object[property])
     });
