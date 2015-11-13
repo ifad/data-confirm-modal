@@ -32,9 +32,13 @@ And then require the Javascript from your `application.js`:
 
 ### With Rails
 
-By default, the overrides Rails' default behaviour for you, with no change
-required to your code. The modal is applicable to `<a>`, `<button>` and `<input[submit]>` 
-elements.
+By default, the Gem's Javascript overrides Rails' [data-confirm behaviour][]
+for you, with no change required to your code. The modal is applicable to
+`<a>`, `<button>` and `<input[submit]>`  elements by default.
+
+Example:
+
+    <%= link_to 'Delete', data: {confirm: 'Are you sure?'} %>
 
 The modal's title will be get from the link's `title` attribute value. The
 modal text will be taken from the `data-confirm` value. Multiple paragraphs
@@ -43,9 +47,13 @@ are created automatically from two newlines (`\n\n`).
 The modal's 'confirm' button text can be customized using the `data-commit`
 attribute.
 
+    <%= link_to 'Delete', data: {confirm: 'Are you sure?', commit: 'Sure!'} %>
+
 Add a `data-verify` attribute to your input if you want an extra confirmation
 from the user. The modal will contain an extra text input, and the user will be
 asked to type the verification value before being allowed to proceed.
+
+    <%= link_to 'Delete', data: {confirm: 'Are you sure?', verify: 'Foo', verify_text: 'Type "Foo" to confirm'} %>
 
 You can set global setting using `dataConfirmModal.setDefaults`, for example:
 
@@ -57,13 +65,15 @@ You can set global setting using `dataConfirmModal.setDefaults`, for example:
 
 To restore default settings use `dataConfirmModal.restoreDefaults()`.
 
+[data-confirm-behaviour]: http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html
+
 ### Without Rails, with data attributes
 
 Given an element with `data-confirm` attributes in place, such as
 
     <a id="foo" href="#" data-confirm="Really do this?" data-commit="Do it" data-cancel="Not really"/>
 
-you can invoke `.confirmModal()` on it:
+you can then invoke `.confirmModal()` on it using:
 
     $('#foo').confirmModal();
 
