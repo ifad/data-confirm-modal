@@ -250,9 +250,11 @@
   };
 
   $.fn.confirmModal = function () {
-    getModal($(this)).spawn();
+    var modal = getModal($(this));
 
-    return this;
+    modal.spawn();
+
+    return modal;
   };
 
   if ($.rails) {

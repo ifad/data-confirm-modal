@@ -67,7 +67,7 @@ To restore default settings use `dataConfirmModal.restoreDefaults()`.
 
 [data-confirm-behaviour]: http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html
 
-### Without Rails, with data attributes
+### Without Rails, with data attributes ([example](http://jsfiddle.net/h7ra55ss/))
 
 Given an element with `data-confirm` attributes in place, such as
 
