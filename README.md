@@ -67,7 +67,7 @@ To restore default settings use `dataConfirmModal.restoreDefaults()`.
 
 [data-confirm-behaviour]: http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html
 
-### Without Rails, with data attributes ([example](http://jsfiddle.net/h7ra55ss/))
+### Without Rails, with data attributes ([example](http://jsfiddle.net/ze2Lz8tm/))
 
 Given an element with `data-confirm` attributes in place, such as
 
@@ -80,7 +80,7 @@ you can then invoke `.confirmModal()` on it using:
 that'll display the confirmation modal. If the user confirms, then the `#foo`
 link will receive a `click` event.
 
-### Without Rails, without data attributes
+### Without Rails, without data attributes ([example](https://jsfiddle.net/h370g63r/))
 
 Use `dataConfirmModal.confirm()` passing any of the supported options, and pass
 an `onConfirm` and `onCancel` callbacks that'll be invoked when the user clicks
@@ -95,8 +95,6 @@ the confirm or the cancel buttons.
       onConfirm: function() { alert('confirmed') },
       onCancel:  function() { alert('cancelled') }
     });
-
-A live jsfiddle example is [available here](http://jsfiddle.net/t0m7ayr3/).
 
 ### Modal Options
 
