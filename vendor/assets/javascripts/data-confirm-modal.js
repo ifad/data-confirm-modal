@@ -114,7 +114,9 @@
     modal.data('confirmed', false);
     modal.find('.commit').on('click', function () {
       modal.data('confirmed', true);
-      element.trigger('click');
+      // Call the original event handler chain
+      element.get(0).click();
+
       modal.modal('hide');
     });
 
