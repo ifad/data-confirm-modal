@@ -30,7 +30,7 @@ And then require the Javascript from your `application.js`:
 
 ## Usage
 
-### With Rails
+### With Rails ([example](http://jsfiddle.net/zpu4u6mh/))
 
 By default, the Gem's Javascript overrides Rails' [data-confirm behaviour][]
 for you, with no change required to your code. The modal is applicable to
