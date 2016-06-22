@@ -239,10 +239,12 @@
    * caching it into the element's `confirm-modal` data attribute.
    */
   var getModal = function (element) {
-    var modal = element.data('confirm-modal') || buildElementModal(element);
+    var modal = element.data('confirm-modal');
 
-    if (modal && !element.data('confirm-modal'))
+    if (!modal) {
+      modal = buildElementModal(element);
       element.data('confirm-modal', modal);
+    }
 
     return modal;
   };
