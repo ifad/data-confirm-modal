@@ -111,9 +111,7 @@
 
     var modal = buildModal(options);
 
-    modal.data('confirmed', false);
     modal.find('.commit').on('click', function () {
-      modal.data('confirmed', true);
       // Call the original event handler chain
       element.get(0).click();
 
@@ -259,27 +257,43 @@
 
   if ($.rails) {
     /**
-     * Attaches to the Rails' UJS adapter 'confirm' event on links having a
-     * `data-confirm` attribute. Temporarily overrides the `$.rails.confirm`
-     * function with an anonymous one that returns the 'confirmed' status of
-     * the modal.
+     * Attaches to Rails' UJS adapter's 'confirm' event, triggered on elements
+     * having a `data-confirm` attribute set.
      *
-     * A modal is considered 'confirmed' when an user has successfully clicked
-     * the 'confirm' button in it.
+     * If the modal is not visible, then it is spawned and the default Rails
+     * confirmation dialog is canceled.
+     *
+     * If the modal is visible, it means the handler is being called by the
+     * modal commit button click handler, as such the user has successfully
+     * clicked on the confirm button. In this case Rails' confirm function
+     * is briefly overriden, and afterwards reset when the modal is closed.
+     *
      */
+    var rails_confirm = $.rails.confirm;
+
     $(document).delegate(settings.elements.join(', '), 'confirm', function() {
       var element = $(this), modal = getModal(element);
-      var confirmed = modal.data('confirmed');
 
-      if (!confirmed && !modal.is(':visible')) {
+      if (!modal.is(':visible')) {
         modal.spawn();
 
-        var confirm = $.rails.confirm;
-        $.rails.confirm = function () { return modal.data('confirmed'); }
-        modal.on('hide', function () { $.rails.confirm = confirm; });
-      }
+        // Cancel Rails' confirmation
+        return false;
 
-      return confirmed;
+      } else {
+        // Modal has been confirmed. Override Rails' handler
+        $.rails.confirm = function () {
+          return true;
+        }
+
+        modal.one('hidden.bs.modal', function() {
+          // Reset it after modal is closed.
+          $.rails.confirm = rails_confirm;
+        });
+
+        // Proceed with Rails' handlers
+        return true;
+      }
     });
   }
 
