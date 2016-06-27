@@ -1,5 +1,7 @@
 # Data-Confirm Modal
 
+[![Gem Version](https://badge.fury.io/rb/data-confirm-modal.svg)](https://badge.fury.io/rb/data-confirm-modal)
+
 Uses [Bootstrap's modals](http://twitter.github.io/bootstrap/javascript.html#modals)
 in place of the browser's builtin `confirm()` API for links generated through Rails'
 helpers with the `:confirm` option.
@@ -14,7 +16,7 @@ certain value, for extra willingness confirmation (inspired by GitHub's
 
 Add this line to your application's Gemfile:
 
-    gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+    gem 'data-confirm-modal'
 
 if you are stuck on Bootstrap 2.3, use the `bootstrap2` branch:
 
