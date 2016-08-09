@@ -95,6 +95,7 @@
       text:         element.data('confirm'),
       focus:        element.data('focus'),
       method:       element.data('method'),
+      modalClass:   element.data('modal-class'),
       commit:       element.data('commit'),
       commitClass:  element.data('commit-class'),
       cancel:       element.data('cancel'),
@@ -124,7 +125,7 @@
   var buildModal = function (options) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
     var fade = settings.fade ? 'fade' : '';
-    var modalClass = settings.modalClass ? settings.modalClass : '';
+    var modalClass = options.modalClass ? options.modalClass : settings.modalClass;
 
     var modal = $(
       '<div id="'+id+'" class="modal '+fade+' '+modalClass+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
