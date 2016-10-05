@@ -91,7 +91,7 @@
 
   var buildElementModal = function (element) {
     var options = {
-      title:        element.attr('title') || element.data('original-title'),
+      title:        element.data('title') || element.attr('title') || element.data('original-title'),
       text:         element.data('confirm'),
       focus:        element.data('focus'),
       method:       element.data('method'),
