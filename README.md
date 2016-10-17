@@ -38,13 +38,12 @@ By default, the Gem's Javascript overrides Rails' [data-confirm behaviour][]
 for you, with no change required to your code. The modal is applicable to
 `<a>`, `<button>` and `<input[submit]>`  elements by default.
 
-Example:
-
     <%= link_to 'Delete', data: {confirm: 'Are you sure?'} %>
 
-The modal's title will be get from the link's `title` attribute value. The
-modal text will be taken from the `data-confirm` value. Multiple paragraphs
-are created automatically from two newlines (`\n\n`).
+The modal's title text can be customized using the `data-title` attribute. 
+If `data-title` is not defined it falls back to the `title` attribute.
+
+    <%= link_to 'Delete', data: {title: 'Are You Sure?'} %>
 
 The modal's 'confirm' button text can be customized using the `data-commit`
 attribute.
