@@ -1,0 +1,18 @@
+{
+  "name": "data-confirm-modal",
+  "authors": [
+    "Marcello Barnaba <vjt@openssl.it>"
+  ],
+  "homepage": "http://github.com/ifad/data-confirm-modal",
+  "description": "Use bootstrap modals with Rails' UJS data-confirm",
+  "main": "vendor/assets/javascripts/data-confirm-modal.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": ">=3.0.0",
+    "jquery-ujs": ">=1.0.0"
+  },
+  "ignore": [
+    "*",
+    "!vendor/assets/javascripts"
+  ]
+}
