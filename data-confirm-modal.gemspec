@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/ifad/data-confirm-modal"
   s.summary     = "Use bootstrap modals with Rails' UJS data-confirm"
   s.description = "This gem overrides Rails' UJS behaviour to open up a Bootstrap Modal instead of the browser's built in confirm() dialog"
+  s.license	= 'MIT'
 
   s.required_rubygems_version = ">= 1.3.6"
 
