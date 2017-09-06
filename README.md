@@ -14,6 +14,7 @@ certain value, for extra willingness confirmation (inspired by GitHub's
 
 ## Installation
 
+### Ruby/Rails
 Add this line to your application's Gemfile:
 
     gem 'data-confirm-modal'
@@ -29,6 +30,18 @@ Then execute:
 And then require the Javascript from your `application.js`:
 
     //= require data-confirm-modal
+
+### Node
+Install the package:
+```bash
+npm install data-confirm-modal
+```
+
+Require and invoke the module within your code:
+```javascript
+var DataConfirmModal = require('data-confirm-modal');
+DataConfirmModal(jQuery);
+```
 
 ## Usage
 
