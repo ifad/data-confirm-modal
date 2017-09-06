@@ -1,0 +1,6 @@
+# Ignore Ruby sources
+
+Gemfile
+Rakefile
+data-confirm-modal.gemspec
+lib/
