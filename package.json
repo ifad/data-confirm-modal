@@ -1,6 +1,6 @@
 {
   "name": "data-confirm-modal",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "Makes Rails' link_to confirm: 'foo' build a Bootstrap Modal instead of calling the browser's confirm() API.",
   "main": "vendor/assets/javascripts/data-confirm-modal.js",
   "repository": "https://github.com/ifad/data-confirm-modal.git",
