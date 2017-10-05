@@ -129,11 +129,11 @@
 
     var modal = $(
       '<div id="'+id+'" class="modal '+modalClass+' '+fade+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
-        '<div class="modal-dialog">' +
+        '<div class="modal-dialog" role="document">' +
           '<div class="modal-content">' +
             '<div class="modal-header">' +
+              '<h5 id="'+id+'Label" class="modal-title"></h5> ' +
               '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-              '<h4 id="'+id+'Label" class="modal-title"></h4> ' +
             '</div>' +
             '<div class="modal-body"></div>' +
             '<div class="modal-footer">' +
@@ -272,7 +272,7 @@
      * is briefly overriden, and afterwards reset when the modal is closed.
      *
      */
-    var rails_confirm = $.rails.confirm;
+    var window_confirm = window.confirm;
 
     $(document).delegate(settings.elements.join(', '), 'confirm', function() {
       var element = $(this), modal = getModal(element);
@@ -285,13 +285,13 @@
 
       } else {
         // Modal has been confirmed. Override Rails' handler
-        $.rails.confirm = function () {
+        window.confirm = function () {
           return true;
         }
 
         modal.one('hidden.bs.modal', function() {
           // Reset it after modal is closed.
-          $.rails.confirm = rails_confirm;
+          window.confirm = window_confirm;
         });
 
         // Proceed with Rails' handlers
