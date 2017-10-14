@@ -313,7 +313,7 @@
     throw new Error('Data-Confirm-Modal requires jQuery');
   }
 
-  if(typeof module !== 'undefined' && module.exports) {
+  if (typeof module !== 'undefined' && module.exports) {
     module.exports = initialize;
   } else {
     window.dataConfirmModal = initialize(jQuery);
