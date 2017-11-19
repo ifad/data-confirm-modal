@@ -152,13 +152,32 @@
     var fade = settings.fade ? 'fade' : '';
     var modalClass = options.modalClass ? options.modalClass : settings.modalClass;
 
+    var modalTitle = '<h5 id="'+id+'Label" class="modal-title"></h5> '
+    var modalClose = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+    var modalHeader;
+
+    // Bootstrap 3 and 4 have different DOMs and different CSS. In B4, the
+    // modalHeader is display:flex and the modalClose uses negative margins,
+    // so it can stay after the modalTitle.
+    //
+    // In B3, the close button floats to the right, so it must stay before
+    // the modalTitle.
+    //
+    switch (bootstrapVersion) {
+    case 3:
+      modalHeader = modalClose + modalTitle;
+      break;
+    case 4:
+      modalHeader = modalTitle + modalClose;
+      break;
+    }
+
     var modal = $(
       '<div id="'+id+'" class="modal '+modalClass+' '+fade+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
         '<div class="modal-dialog" role="document">' +
           '<div class="modal-content">' +
             '<div class="modal-header">' +
-              '<h5 id="'+id+'Label" class="modal-title"></h5> ' +
-              '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+              modalHeader +
             '</div>' +
             '<div class="modal-body"></div>' +
             '<div class="modal-footer">' +
