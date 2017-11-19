@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/data-confirm-modal.svg)](https://badge.fury.io/rb/data-confirm-modal)
 
-Uses [Bootstrap's modals](http://twitter.github.io/bootstrap/javascript.html#modals)
+Uses [Bootstrap's modals](https://twitter.github.io/bootstrap/javascript.html#modals)
 in place of the browser's builtin `confirm()` API for links generated through Rails'
 helpers with the `:confirm` option.
 
@@ -99,7 +99,7 @@ the confirm or the cancel buttons.
 
 ### Modal Options
 
-The default [bootstrap modal options](http://getbootstrap.com/javascript/#modals-options)
+The default [bootstrap modal options](https://getbootstrap.com/javascript/#modals-options)
 can be passed either via JavaScript or through data attributes.
 
      $('#foo').confirmModal({backdrop: 'static', keyboard: false});
@@ -116,7 +116,7 @@ or
 
 ## Background
 
-Spinned off a corporate [IFAD](http://github.com/ifad/) application in which
+Spinned off a corporate [IFAD](https://github.com/ifad/) application in which
 an user did too much damage because the confirm wasn't *THAT* explicit ... ;-).
 
 ## Contributing
