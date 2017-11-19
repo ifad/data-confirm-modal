@@ -18,7 +18,8 @@ Add this line to your application's Gemfile:
 
     gem 'data-confirm-modal'
 
-if you are stuck on Bootstrap 2.3, use the `bootstrap2` branch:
+The library supports Bootstrap 3 and 4. If you are stuck on Bootstrap 2.3, you must
+use the `bootstrap2` branch:
 
     gem 'data-confirm-modal', github: 'ifad/data-confirm-modal', branch: 'bootstrap2'
 
@@ -32,7 +33,7 @@ And then require the Javascript from your `application.js`:
 
 ## Usage
 
-### With Rails ([example](http://jsfiddle.net/zpu4u6mh/))
+### With Rails: [example B3](https://jsfiddle.net/zpu4u6mh/), [example B4](https://jsfiddle.net/02t20nwx/)
 
 By default, the Gem's Javascript overrides Rails' [data-confirm behaviour][]
 for you, with no change required to your code. The modal is applicable to
@@ -68,7 +69,7 @@ To restore default settings use `dataConfirmModal.restoreDefaults()`.
 
 [data-confirm-behaviour]: http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html
 
-### Without Rails, with data attributes ([example](http://jsfiddle.net/ze2Lz8tm/))
+### Without Rails, with data attributes: [example B3](https://jsfiddle.net/nugqscyx/), [example B4](https://jsfiddle.net/0g53ar5n/)
 
 Given an element with `data-confirm` attributes in place, such as
 
@@ -81,7 +82,7 @@ you can then invoke `.confirmModal()` on it using:
 that'll display the confirmation modal. If the user confirms, then the `#foo`
 link will receive a `click` event.
 
-### Without Rails, without data attributes ([example](https://jsfiddle.net/h370g63r/))
+### Without Rails, without data attributes: [example B3](https://jsfiddle.net/h370g63r/), [example B4](https://jsfiddle.net/veg879px/)
 
 Use `dataConfirmModal.confirm()` passing any of the supported options, and pass
 an `onConfirm` and `onCancel` callbacks that'll be invoked when the user clicks
