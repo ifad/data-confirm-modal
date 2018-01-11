@@ -268,11 +268,11 @@
     $('body').append(modal);
 
     modal.spawn = function() {
-      return modal.modal({
+      return modal.modal($.extend({}, {
         backdrop: options.backdrop,
         keyboard: options.keyboard,
         show:     options.show
-      });
+      }));
     };
 
     return modal;
