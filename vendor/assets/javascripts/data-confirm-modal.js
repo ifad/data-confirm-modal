@@ -302,7 +302,7 @@
     return modal;
   };
 
-  if ($.rails) {
+  if (window.Rails || $.rails) {
     /**
      * Attaches to Rails' UJS adapter's 'confirm' event, triggered on elements
      * having a `data-confirm` attribute set.
