@@ -283,8 +283,8 @@
    * Returns a modal already built for the given element or builds a new one,
    * caching it into the element's `confirm-modal` data attribute.
    */
-  var getModal = function (element) {
-    var modal = element.data('confirm-modal');
+  $.fn.getConfirmModal = function () {
+    var element = $(this), modal = element.data('confirm-modal');
 
     if (!modal) {
       modal = buildElementModal(element);
@@ -295,7 +295,7 @@
   };
 
   $.fn.confirmModal = function () {
-    var modal = getModal($(this));
+    var modal = $(this).getConfirmModal();
 
     modal.spawn();
 
@@ -319,7 +319,7 @@
     var window_confirm = window.confirm;
 
     $(document).delegate(settings.elements.join(', '), 'confirm', function() {
-      var element = $(this), modal = getModal(element);
+      var modal = $(this).getConfirmModal();
 
       if (!modal.is(':visible')) {
         modal.spawn();
