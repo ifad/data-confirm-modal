@@ -47,6 +47,7 @@
     focus: 'commit',
     zIndex: 1050,
     modalClass: false,
+    modalCloseContent: '&times;',
     show: true
   };
 
@@ -116,23 +117,24 @@
 
   var buildElementModal = function (element) {
     var options = {
-      title:        element.data('title') || element.attr('title') || element.data('original-title'),
-      text:         element.data('confirm'),
-      focus:        element.data('focus'),
-      method:       element.data('method'),
-      modalClass:   element.data('modal-class'),
-      commit:       element.data('commit'),
-      commitClass:  element.data('commit-class'),
-      cancel:       element.data('cancel'),
-      cancelClass:  element.data('cancel-class'),
-      remote:       element.data('remote'),
-      verify:       element.data('verify'),
-      verifyRegexp: element.data('verify-regexp'),
-      verifyLabel:  element.data('verify-text'),
+      title:             element.data('title') || element.attr('title') || element.data('original-title'),
+      text:              element.data('confirm'),
+      focus:             element.data('focus'),
+      method:            element.data('method'),
+      modalClass:        element.data('modal-class'),
+      modalCloseContent: element.data('modal-close-content'),
+      commit:            element.data('commit'),
+      commitClass:       element.data('commit-class'),
+      cancel:            element.data('cancel'),
+      cancelClass:       element.data('cancel-class'),
+      remote:            element.data('remote'),
+      verify:            element.data('verify'),
+      verifyRegexp:      element.data('verify-regexp'),
+      verifyLabel:       element.data('verify-text'),
       verifyRegexpCaseInsensitive: element.data('verify-regexp-caseinsensitive'),
-      backdrop:     element.data('backdrop'),
-      keyboard:     element.data('keyboard'),
-      show:         element.data('show')
+      backdrop:          element.data('backdrop'),
+      keyboard:          element.data('keyboard'),
+      show:              element.data('show')
     };
 
     var modal = buildModal(options);
@@ -152,8 +154,10 @@
     var fade = settings.fade ? 'fade' : '';
     var modalClass = options.modalClass ? options.modalClass : settings.modalClass;
 
+    var modalCloseContent = options.modalCloseContent ? options.modalCloseContent : settings.modalCloseContent;
+    var modalClose = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'+modalCloseContent+'</button>'
+
     var modalTitle = '<h5 id="'+id+'Label" class="modal-title"></h5> '
-    var modalClose = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
     var modalHeader;
 
     // Bootstrap 3 and 4 have different DOMs and different CSS. In B4, the
