@@ -47,6 +47,7 @@
     focus: 'commit',
     zIndex: 1050,
     modalClass: false,
+    dialogClass: false,
     modalCloseContent: '&times;',
     show: true
   };
@@ -122,6 +123,7 @@
       focus:             element.data('focus'),
       method:            element.data('method'),
       modalClass:        element.data('modal-class'),
+      dialogClass:       element.data('dialog-class'),
       modalCloseContent: element.data('modal-close-content'),
       commit:            element.data('commit'),
       commitClass:       element.data('commit-class'),
@@ -153,7 +155,7 @@
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
     var fade = settings.fade ? 'fade' : '';
     var modalClass = options.modalClass ? options.modalClass : settings.modalClass;
-
+    var dialogClass = options.dialogClass ? options.dialogClass : settings.dialogClass;
     var modalCloseContent = options.modalCloseContent ? options.modalCloseContent : settings.modalCloseContent;
     var modalClose = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'+modalCloseContent+'</button>'
 
@@ -178,7 +180,7 @@
 
     var modal = $(
       '<div id="'+id+'" class="modal '+modalClass+' '+fade+'" tabindex="-1" role="dialog" aria-labelledby="'+id+'Label" aria-hidden="true">' +
-        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-dialog '+dialogClass+'" role="document">' +
           '<div class="modal-content">' +
             '<div class="modal-header">' +
               modalHeader +
