@@ -14,6 +14,8 @@ certain value, for extra willingness confirmation (inspired by GitHub's
 
 ## Installation
 
+### Sprockets
+
 Add this line to your application's Gemfile:
 
     gem 'data-confirm-modal'
@@ -31,6 +33,33 @@ And then require the Javascript from your `application.js`:
 
     //= require data-confirm-modal
 
+### Webpacker
+
+Gem is not required for this use case.
+
+Add the following package:
+
+    yarn add data-confirm-modal
+
+Autoload jQuery in `config/webpack/environment.js`:
+
+    const { environment } = require('@rails/webpacker')
+
+    const webpack = require('webpack')
+
+    environment.plugins.prepend(
+      'Provide',
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+      })
+    )
+
+    module.exports = environment
+
+And then require the JavaScript from your pack's `application.js`, after `require('@rails/ujs').start()`:
+
+    require('data-confirm-modal')
+
 ## Usage
 
 ### With Rails: [example B3](https://jsfiddle.net/zpu4u6mh/), [example B4](https://jsfiddle.net/02t20nwx/)
@@ -41,7 +70,7 @@ for you, with no change required to your code. The modal is applicable to
 
     <%= link_to 'Delete', data: {confirm: 'Are you sure?'} %>
 
-The modal's title text can be customized using the `data-title` attribute. 
+The modal's title text can be customized using the `data-title` attribute.
 If `data-title` is not defined it falls back to the `title` attribute.
 
     <%= link_to 'Delete', data: {title: 'Are You Sure?'} %>
