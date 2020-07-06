@@ -116,6 +116,7 @@ link will receive a `click` event.
 Use `dataConfirmModal.confirm()` passing any of the supported options, and pass
 an `onConfirm` and `onCancel` callbacks that'll be invoked when the user clicks
 the confirm or the cancel buttons.
+`onHide` callback will be invoked when the modal closes.
 
     dataConfirmModal.confirm({
       title: 'Are you sure?',
@@ -124,7 +125,8 @@ the confirm or the cancel buttons.
       cancel: 'Not really',
       zIindex: 10099,
       onConfirm: function() { alert('confirmed') },
-      onCancel:  function() { alert('cancelled') }
+      onCancel:  function() { alert('cancelled') },
+      onHide:    function() { alert('hidden') }
     });
 
 ### Modal Options
