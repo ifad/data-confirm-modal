@@ -85,6 +85,11 @@
 
         modal.modal('hide');
       });
+
+      modal.on('hidden.bs.modal', function () {
+        if (options.onHide && options.onHide.call)
+          options.onHide.call();
+      });
     }
   };
 
