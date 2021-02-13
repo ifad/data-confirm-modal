@@ -1,6 +1,5 @@
-# Ignore Ruby sources
-
-Gemfile
-Rakefile
-data-confirm-modal.gemspec
-lib/
+# Use an allowlist approach to ignore everything but /vendor
+# LICENSE, package.json, and README (with its varations) are never ignored 
+# https://npm.github.io/publishing-pkgs-docs/publishing/the-npmignore-file.html
+*
+!/vendor
