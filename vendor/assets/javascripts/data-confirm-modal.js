@@ -46,7 +46,7 @@
     elements: ['a[data-confirm]', 'button[data-confirm]', 'input[type=submit][data-confirm]'],
     focus: 'commit',
     zIndex: 1050,
-    modalClass: false,
+    modalClass: '',
     modalCloseContent: '&times;',
     show: true
   };
