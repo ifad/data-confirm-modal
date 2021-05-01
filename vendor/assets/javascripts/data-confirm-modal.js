@@ -250,7 +250,7 @@
       });
 
       modal.on('shown.bs.modal', function () {
-        verification.focus();
+        verification.trigger('focus');
       });
 
       modal.on('hidden.bs.modal', function () {
@@ -274,7 +274,7 @@
     focus_element = modal.find('.' + focus_element);
 
     modal.on('shown.bs.modal', function () {
-      focus_element.focus();
+      focus_element.trigger('focus');
     });
 
     $('body').append(modal);
@@ -330,7 +330,7 @@
      */
     var window_confirm = window.confirm;
 
-    $(document).delegate(settings.elements.join(', '), 'confirm', function() {
+    $(document).on('confirm', settings.elements.join(', '), function() {
       var modal = $(this).getConfirmModal();
 
       if (!modal.is(':visible')) {
