@@ -50,7 +50,8 @@
         dialogClass: '',
         modalCloseContent: '&times;',
         show: true,
-        waitUpdate: false
+        waitUpdate: false,
+        update: "Confirming..."
     };
 
     var settings;
@@ -143,7 +144,8 @@
             backdrop: element.data('backdrop'),
             keyboard: element.data('keyboard'),
             show: element.data('show'),
-            waitUpdate: element.data('wait-update')
+            waitUpdate: element.data('wait-update'),
+            update: element.data('update')
         };
 
         var modal = buildModal(options);
@@ -156,8 +158,8 @@
                 var commit = modal.find('.commit');
                 modal.data('bs.modal')._config.backdrop = 'static';
                 modal.data('bs.modal')._config.keyboard = false;
-
-                commit.html("<i class='fas fa-circle-notch fa-spin' style='padding: 0 !important;margin-right: 10px;'></i> Updating...");
+                modal.find('.commit').attr('disabled', true);
+                commit.html("<i class='fas fa-circle-notch fa-spin'></i>" + (options.update ? options.update : settings.update));
                 document.body.addEventListener("ajax:complete", (event) => {
                     modal.modal('hide');
                 });
