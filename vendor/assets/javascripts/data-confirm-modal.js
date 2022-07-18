@@ -73,7 +73,7 @@
         modal.remove();
       });
 
-      modal.find('.commit').on('click', function () {
+      modal.find('.commit').one('click', function () {
         if (options.onConfirm && options.onConfirm.call)
           options.onConfirm.call();
 
