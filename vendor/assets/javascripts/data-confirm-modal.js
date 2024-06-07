@@ -37,6 +37,8 @@
 
   var defaults = {
     title: 'Are you sure?',
+    titleClass: 'modal-title',
+    titleElement: 'h5',
     commit: 'Confirm',
     commitClass: 'btn-danger',
     cancel: 'Cancel',
@@ -124,6 +126,8 @@
   var buildElementModal = function (element) {
     var options = {
       title:             element.data('title') || element.attr('title') || element.data('original-title'),
+      titleClass:        element.data('title-class'),
+      titleElement:      element.data('title-element'),
       text:              element.data('confirm'),
       focus:             element.data('focus'),
       method:            element.data('method'),
@@ -159,12 +163,14 @@
   var buildModal = function (options) {
     var id = 'confirm-modal-' + String(Math.random()).slice(2, -1);
     var fade = settings.fade ? 'fade' : '';
+    var titleClass = options.titleClass ? options.titleClass : settings.titleClass;
+    var titleElement = options.titleElement ? options.titleElement : settings.titleElement;
     var modalClass = options.modalClass ? options.modalClass : settings.modalClass;
     var dialogClass = options.dialogClass ? options.dialogClass : settings.dialogClass;
     var modalCloseContent = options.modalCloseContent ? options.modalCloseContent : settings.modalCloseContent;
     var modalClose = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'+modalCloseContent+'</button>'
 
-    var modalTitle = '<h5 id="'+id+'Label" class="modal-title"></h5> '
+    var modalTitle = '<'+titleElement+' id="'+id+'Label" class="'+titleClass+'"></'+titleElement+'> '
     var modalHeader;
 
     // Bootstrap 3 and 4 have different DOMs and different CSS. In B4, the
